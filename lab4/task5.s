@@ -4,7 +4,7 @@
     new_line: .asciiz "\n"
 .text
 main:
-    li x5,5
+    li x5,6
     li x7,0
     loop:
         beq x5, x0, exit_loop
@@ -19,12 +19,14 @@ main:
         exit_inner_loop1:
         
         li x6, 0 # it is zero regardless
+        slli x8, x7, 1
+        addi x8,x8,1
         inner_loop2:
         la a1, astrik
         li a0, 4
         ecall
         addi x6, x6, 1
-        blt x6,x7 inner_loop2
+        blt x6,x8 inner_loop2
         exit_inner_loop2:
         addi x5,x5,-1
         la a1, new_line
